@@ -1,6 +1,8 @@
 # Potrivia - Jogo de Perguntas e Respostas
 
-O Potrivia é um jogo de perguntas e respostas que abrange várias áreas, incluindo Artes, Ciências e Desporto. Este projeto foi desenvolvido por João Furukawa e Mateus Lima como parte do curso de Programação Orientada a Objetos da Universidade de Coimbra. Aviso: as perguntas presentes no jogo são ilustrativas e podem não estar corretas.
+O Potrivia é um jogo de perguntas e respostas que abrange várias áreas, incluindo Artes, Ciências e Desporto. Este projeto foi desenvolvido por João Furukawa e Mateus Lima como parte do curso de Programação Orientada a Objetos da Universidade de Coimbra. 
+
+Aviso: as perguntas, respostas e opções são exageradas para demonstrar as funcionalidades do jogo!
 
 ## Funcionalidades
 
@@ -9,7 +11,7 @@ O Potrivia é um jogo de perguntas e respostas que abrange várias áreas, inclu
 - Interface interativa para uma experiência de jogo envolvente.
 - Sistema de ranking para armazenar as pontuações mais altas.
 - Sistema de salvamento de perguntas em arquivos `.txt` para permitir a adição de novas perguntas sem a necessidade de alterar o código-fonte.
-- Ao avançar do jogo, as perguntas se tornam mais difíceis, isto é, aumentando o número de alternativas e/ou colocando respostas mais difíceis.
+- Ao avançar do jogo, as perguntas se tornam mais difíceis, isto é, aumentando o número de alternativas e/ou colocando opções mais difíceis.
 - Implementação de JavaDocs para facilitar a compreensão do código-fonte.
 
 ## Estrutura do Projeto
