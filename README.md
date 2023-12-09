@@ -56,10 +56,10 @@ Contribuições são bem-vindas! Se você deseja contribuir para o desenvolvimen
 
 ## Imagens do menu(bem básico)
 
-- [Imagem1](Screenshot_127)
-- [Imagem2](Screenshot_128)
-- [Imagem3](Screenshot_129)
-- [Imagem4](Screenshot_130)
+- [Imagem1](Screenshot_127.png)
+- [Imagem2](Screenshot_128.png)
+- [Imagem3](Screenshot_129.png)
+- [Imagem4](Screenshot_130.png)
 
 ## Licença
 
