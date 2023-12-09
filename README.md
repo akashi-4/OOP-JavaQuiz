@@ -54,6 +54,13 @@ Contribuições são bem-vindas! Se você deseja contribuir para o desenvolvimen
 - João Furukawa
 - Mateus Lima
 
+## Imagens do menu(bem básico)
+
+[Imagem1](Screenshot_127)
+[Imagem2](Screenshot_128)
+[Imagem3](Screenshot_129)
+[Imagem4](Screenshot_130)
+
 ## Licença
 
 Este projeto está sob a Licença MIT - veja o arquivo [LICENSE.md](LICENSE) para detalhes.
