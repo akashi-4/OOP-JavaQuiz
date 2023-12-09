@@ -41,7 +41,8 @@ Aviso: as perguntas, respostas e opções são exageradas para demonstrar as fun
             - **Artes:** formato do .txt: tipo;subtipo;pergunta;resposta;opção1;opção2;opção3;opção4 
             - **Ciências:** formato do .txt: tipo;subtipo;pergunta;resposta;opção1;opção2;opção3;opção4;opçãoFacil1;opçãoFacil2;opçãoFacil3;opçãoFacil4
             - **Desporto:** formato do .txt: tipo;subtipo;pergunta;resposta;resposta2;opção1;opção2;opção3;opção4;opçãoDificil1;opçãoDificil2;opçãoDificil3;opçãoDificil4
-            Atenção: o tipo varia de 1 a 3, sendo 1->Artes, 2->Ciências e 3->Desporto. O subtipo varia de 1 a 3, sendo 1->Futebol, 2->Ski e 3->Natação.
+   
+      Atenção: o tipo varia de 1 a 3, sendo 1->Artes, 2->Ciências e 3->Desporto. O subtipo varia de 1 a 3, sendo 1->Futebol, 2->Ski e 3->Natação.
 3. Execute a classe `Potrivia.java` para iniciar o jogo.
 
 ## Contribuições
