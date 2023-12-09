@@ -56,12 +56,12 @@ Contribuições são bem-vindas! Se você deseja contribuir para o desenvolvimen
 
 ## Imagens do menu(bem básico)
 
-- [Inicial](Screenshot_127.png)
-- [Ao acertar uma pergunta](Screenshot_128.png)
-- [Ao errar uma pergunta](Screenshot_129.png)
-- [Inserir o nome](Screenshot_130.png)
-- [Ranking TOP 3](Screenshot_135.png)
-- [Iniciar novo jogo](Screenshot_136.png)
+- [Inicial](imagens/inicio.png)
+- [Ao acertar uma pergunta](imagens/acerto.png)
+- [Ao errar uma pergunta](imagens/erro.png)
+- [Inserir o nome](imagens/inserirnome.png)
+- [Ranking TOP 3](imagens/top3.png)
+- [Iniciar novo jogo](imagens/novojogo.png)
 
 ## Licença
 
