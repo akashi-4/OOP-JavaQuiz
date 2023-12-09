@@ -59,7 +59,9 @@ Contribuições são bem-vindas! Se você deseja contribuir para o desenvolvimen
 - [Inicial](Screenshot_127.png)
 - [Ao acertar uma pergunta](Screenshot_128.png)
 - [Ao errar uma pergunta](Screenshot_129.png)
-- [Fim do jogo](Screenshot_130.png)
+- [Inserir o nome](Screenshot_130.png)
+- [Ranking TOP 3](Screenshot_135.png)
+- [Iniciar novo jogo](Screenshot_136.png)
 
 ## Licença
 
