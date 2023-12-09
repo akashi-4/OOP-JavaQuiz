@@ -56,10 +56,10 @@ Contribuições são bem-vindas! Se você deseja contribuir para o desenvolvimen
 
 ## Imagens do menu(bem básico)
 
-- [Imagem1](Screenshot_127.png)
-- [Imagem2](Screenshot_128.png)
-- [Imagem3](Screenshot_129.png)
-- [Imagem4](Screenshot_130.png)
+- [Inicial](Screenshot_127.png)
+- [Ao acertar uma pergunta](Screenshot_128.png)
+- [Ao errar uma pergunta](Screenshot_129.png)
+- [Fim do jogo](Screenshot_130.png)
 
 ## Licença
 
