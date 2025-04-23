@@ -3,7 +3,6 @@
  *
  * @version 1.0
  * @author Joao Furukawa
- * @author Mateus Lima
  */
 public class Futebol extends Desporto {
 
@@ -16,19 +15,18 @@ public class Futebol extends Desporto {
      * @param opcoesEz  As opções fáceis de resposta da pergunta.
      * @param resposta2 A resposta adicional associada a perguntas específicas.
      */
-    public Futebol(String pergunta, String resposta, String[] opcoes, String[] opcoesEz,String resposta2){
-        super(3,1,pergunta, resposta, opcoes, opcoesEz,resposta2);
-        this.majoracao = 1;
+    public Futebol(String pergunta, String resposta, String[] opcoes, String[] opcoesEz, String resposta2) {
+        super(pergunta, resposta, opcoes, opcoesEz, resposta2);
+        setMajoracao(1);  // Define a majoração específica para Futebol
     }
 
     /**
-     * Calcula a pontuação para perguntas de Futebol.
+     * Calcula a pontuação específica para perguntas de Futebol.
      *
      * @return A pontuação calculada.
      */
     @Override
-    public int calculaPontos(){
-        int pontuacao = this.pontos + this.majoracao + 3;
-        return pontuacao;
+    public int calculaPontos() {
+        return getPontos() + getMajoracao() + 3;
     }
 }

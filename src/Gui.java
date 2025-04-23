@@ -1,5 +1,7 @@
-import java.awt.*;
+
 import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +20,6 @@ import java.time.format.DateTimeFormatter;
  * Além disso, gerencia o progresso do jogo, as respostas do jogador e as pontuações.
  *
  * @author Joao Furukawa
- * @author Mateus Lima
  * @version 1.0
  */
 public class Gui extends Potrivia implements ActionListener{
@@ -223,20 +224,23 @@ public class Gui extends Potrivia implements ActionListener{
     * @param shuffleArray  A lista de opções embaralhadas.
     */
     private void nextQuestion(int index, ArrayList<Pergunta> perguntas, ArrayList<String> shuffleArray){
-        if (index >= 5){ //Se ja tiverem sido feitas as 5 perguntas
+        if (index >= 5){ // Se já tiverem sido feitas as 5 perguntas
             printRespostas();
             return;
-        }else if (perguntas.get(index).getSubtipo() == 1 && index <= 3){ //Se for de desporto e antes da 4ª pergunta
-            escolheOpcoes(index,perguntas.get(index).getOpcoes(),perguntas.get(index).getResposta(), shuffleArray,3);
-        }else if (perguntas.get(index).getSubtipo() == 1 && index > 3){ //Se for de desporto e depois da 4ª pergunta
-            escolheOpcoes(index,perguntas.get(index).getOpcoesEz(),perguntas.get(index).getResposta2(), shuffleArray,3);
-        }else if (perguntas.get(index).getTipo() == 2 && index < 3){ //Se for de ciencia e antes da 4ª pergunta
-            escolheOpcoes(index,perguntas.get(index).getOpcoesEz(),perguntas.get(index).getResposta(), shuffleArray,2);
-        }else if(perguntas.get(index).getTipo() == 3 && perguntas.get(index).getSubtipo() != 1){ //Se o tipo for Desporto e nao for de Futebol
-            shuffleArray.add(perguntas.get(index).getUmaOpcoes(0)); //Adiciona Verdadeiro
-            shuffleArray.add(perguntas.get(index).getUmaOpcoes(1)); //Adiciona Falso
-        }else{//Se for de artes e ciencias depois da 4ª pergunta
-            escolheOpcoes(index,perguntas.get(index).getOpcoes(),perguntas.get(index).getResposta(), shuffleArray,perguntas.get(index).getTipo());
+        } else if (perguntas.get(index) instanceof Futebol && index <= 3){ // Se for de futebol e antes da 4ª pergunta
+            escolheOpcoes(index, perguntas.get(index).getOpcoes(), perguntas.get(index).getResposta(), shuffleArray, 3);
+        } else if (perguntas.get(index) instanceof Futebol && index > 3){ // Se for de futebol e depois da 4ª pergunta
+            escolheOpcoes(index, perguntas.get(index).getOpcoesEz(), perguntas.get(index).getResposta2(), shuffleArray, 3);
+        } else if (perguntas.get(index) instanceof Ciencias && index < 3){ // Se for de ciência e antes da 4ª pergunta
+            escolheOpcoes(index, perguntas.get(index).getOpcoesEz(), perguntas.get(index).getResposta(), shuffleArray, 2);
+        } else if ((perguntas.get(index) instanceof Ski || perguntas.get(index) instanceof Natacao)){ // Se for de Ski ou Natação
+            shuffleArray.add(perguntas.get(index).getUmaOpcoes(0)); // Adiciona Verdadeiro
+            shuffleArray.add(perguntas.get(index).getUmaOpcoes(1)); // Adiciona Falso
+        } else { // Se for de artes ou ciências depois da 4ª pergunta
+            int tipo = 1; // Artes por padrão
+            if (perguntas.get(index) instanceof Ciencias) tipo = 2;
+            if (perguntas.get(index) instanceof Desporto) tipo = 3;
+            escolheOpcoes(index, perguntas.get(index).getOpcoes(), perguntas.get(index).getResposta(), shuffleArray, tipo);
         }
 
         pontuacao.setText("");

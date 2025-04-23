@@ -7,7 +7,6 @@ import java.util.ArrayList;
  *
  * @version 1.0
  * @author João Furukawa
- * @author Mateus Lima
  */
 public class DataStore implements Serializable {
     /**

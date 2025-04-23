@@ -3,7 +3,6 @@
  *
  * @version 1.0
  * @author Joao Furukawa
- * @author Mateus Lima
  */
 public class Natacao extends Desporto {
 
@@ -15,8 +14,8 @@ public class Natacao extends Desporto {
      * @param opcoes    As opções de resposta para a pergunta.
      */
     public Natacao(String pergunta, String resposta, String[] opcoes) {
-        super(3, 3, pergunta, resposta, opcoes);
-        this.majoracao = 10;
+        super(pergunta, resposta, opcoes);
+        setMajoracao(10);
     }
 
     /**
@@ -25,9 +24,8 @@ public class Natacao extends Desporto {
      * @return A pontuação total.
      */
     @Override
-    protected int calculaPontos() {
-        int pontuacao = this.pontos + this.majoracao + 3;
-        return pontuacao;
+    public int calculaPontos() {
+        return getPontos() + getMajoracao() + 3;
     }
 }
 

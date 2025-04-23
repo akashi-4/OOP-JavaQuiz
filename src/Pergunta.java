@@ -1,340 +1,180 @@
 import java.io.Serializable;
 /**
- * Classe que representa uma pergunta.
+ * Classe abstrata que representa uma pergunta genérica.
+ * Subclasses definirão tipos específicos de perguntas.
  *
- * @version 1.0
- * @author Joao Furukawa
- * @author Mateus Lima
+ * @version 1.1
+ * @author Joao Furukawa and AI Assistant
  */
-public class Pergunta implements Serializable{
-// Membros da classe
+public abstract class Pergunta implements Serializable {
+    // Membros da classe agora privados
+    private String pergunta;
+    private String resposta;
+    private String[] opcoes = new String[4];
+    private String[] opcoesEz = new String[4]; // Mantido para subtipos que o usam
+    private int majoracao;
+    private int pontos = 5; // Pontuação base padrão
+    private String resposta2; // Relevante apenas para alguns subtipos
 
     /**
-     * Texto da pergunta.
-     */
-    protected String pergunta;
-
-    /**
-     * Resposta correta da pergunta.
-     */
-    protected String resposta;
-
-    /**
-     * Opções de resposta da pergunta.
-     */
-    protected String[] opcoes = new String[4];
-
-    /**
-     * Opções fáceis de resposta da pergunta.
-     */
-    protected String[] opcoesEz = new String[4];
-
-    /**
-     * Valor de majoração associado à pergunta.
-     */
-    protected int majoracao;
-
-    /**
-     * Tipo da pergunta (1 para Artes, 2 para Ciências, 3 para Desporto).
-     */
-    protected int tipo;
-
-    /**
-     * Pontuação inicial da pergunta.
-     */
-    protected int pontos = 5;
-
-    /**
-     * Subtipo da pergunta (1 para Futebol, 2 para Ski, 3 para Natação).
-     */
-    protected int subtipo;
-
-    /**
-     * Resposta adicional associada a perguntas específicas.
-     */
-    protected String resposta2;
-    /**
-     * Construtor padrão sem parâmetros.
-     */
-    public Pergunta(){
-
-    }
-    /**
-     * Construtor para perguntas com subtipo.
+     * Construtor base para subclasses.
+     * Inicializa os campos comuns.
      *
-     * @param tipo     O tipo da pergunta (1 para Artes, 2 para Ciências, 3 para Desporto).
-     * @param subtipo  O subtipo da pergunta (1 para Futebol, 2 para Ski, 3 para Natação).
      * @param pergunta O texto da pergunta.
      * @param resposta A resposta correta da pergunta.
-     * @param opcoes   As opções de resposta da pergunta.
+     * @param opcoes   As opções de resposta da pergunta (será clonado).
      */
-    public Pergunta(int tipo, int subtipo, String pergunta, String resposta, String[] opcoes){
-        this.tipo = tipo;
-        this.subtipo = subtipo;
+    protected Pergunta(String pergunta, String resposta, String[] opcoes) {
         this.pergunta = pergunta;
         this.resposta = resposta;
-        this.opcoes = opcoes;
+        // Clone para evitar modificação externa e garantir inicialização
+        this.opcoes = (opcoes != null) ? opcoes.clone() : new String[4];
+        // Inicializações padrão
         this.pontos = 5;
+        // Garante que outros campos opcionais tenham um estado padrão
+        this.opcoesEz = new String[4];
+        this.resposta2 = null;
     }
 
     /**
-     * Construtor para perguntas com subtipo, opções fáceis e resposta adicional.
+     * Construtor base para subclasses que usam opções fáceis e/ou resposta adicional.
      *
-     * @param tipo      O tipo da pergunta (1 para Artes, 2 para Ciências, 3 para Desporto).
-     * @param subtipo   O subtipo da pergunta (1 para Futebol, 2 para Ski, 3 para Natação).
      * @param pergunta  O texto da pergunta.
      * @param resposta  A resposta correta da pergunta.
-     * @param opcoes    As opções de resposta da pergunta.
-     * @param opcoesEz  As opções fáceis de resposta da pergunta.
+     * @param opcoes    As opções de resposta da pergunta (será clonado).
+     * @param opcoesEz  As opções fáceis de resposta da pergunta (será clonado).
      * @param resposta2 A resposta adicional associada a perguntas específicas.
      */
-    public Pergunta(int tipo, int subtipo, String pergunta, String resposta, String[] opcoes, String[] opcoesEz, String resposta2){
-        this.tipo = tipo;
-        this.subtipo = subtipo;
+    protected Pergunta(String pergunta, String resposta, String[] opcoes, String[] opcoesEz, String resposta2) {
         this.pergunta = pergunta;
         this.resposta = resposta;
+        this.opcoes = (opcoes != null) ? opcoes.clone() : new String[4];
+        this.opcoesEz = (opcoesEz != null) ? opcoesEz.clone() : new String[4];
         this.resposta2 = resposta2;
-        this.opcoes = opcoes;
-        this.opcoesEz = opcoesEz;
         this.pontos = 5;
     }
 
-    /**
-     * Construtor para perguntas com subtipo e opções fáceis.
+     /**
+     * Construtor base para subclasses que usam opções fáceis.
      *
-     * @param tipo     O tipo da pergunta (1 para Artes, 2 para Ciências, 3 para Desporto).
-     * @param subtipo  O subtipo da pergunta (1 para Futebol, 2 para Ski, 3 para Natação).
-     * @param pergunta O texto da pergunta.
-     * @param resposta A resposta correta da pergunta.
-     * @param opcoes   As opções de resposta da pergunta.
-     * @param opcoesEz As opções fáceis de resposta da pergunta.
+     * @param pergunta  O texto da pergunta.
+     * @param resposta  A resposta correta da pergunta.
+     * @param opcoes    As opções de resposta da pergunta (será clonado).
+     * @param opcoesEz  As opções fáceis de resposta da pergunta (será clonado).
      */
-    public Pergunta(int tipo, int subtipo, String pergunta, String resposta, String[] opcoes, String[] opcoesEz){
-        this.tipo = tipo;
-        this.subtipo = subtipo;
+    protected Pergunta(String pergunta, String resposta, String[] opcoes, String[] opcoesEz) {
         this.pergunta = pergunta;
         this.resposta = resposta;
-        this.opcoes = opcoes;
-        this.opcoesEz = opcoesEz;
+        this.opcoes = (opcoes != null) ? opcoes.clone() : new String[4];
+        this.opcoesEz = (opcoesEz != null) ? opcoesEz.clone() : new String[4];
+        this.resposta2 = null; // Sem resposta2 neste construtor
         this.pontos = 5;
     }
 
     /**
-     * Lê o input fornecido e inicializa os atributos da pergunta.
+     * Método abstrato para calcular a pontuação específica da subclasse.
      *
-     * @param a String contendo os dados da pergunta.
+     * @return A pontuação calculada para esta pergunta.
      */
-    protected void leInput(String a){
-        String[] input = a.split(";");
-        setTipo(Integer.parseInt(input[0]));
-        setSubtipo(Integer.parseInt(input[1]));
-        setPergunta(input[2]);
-        setResposta(input[3]);
-        if (this.tipo == 3 && this.subtipo == 1){ // Trata das perguntas de Desporto de Futebol
-            setResposta2(input[4]);
-            for (int i = 0; i < opcoes.length; i++) {
-                setOpcoes(i, input[5+i]);
-                setOpcoesEz(i, input[9+i]);
-            }
-        }else if (input.length == 12){ //Trata das perguntas de Ciencias
-            for (int i = 0; i < opcoesEz.length; i++) {
-                setOpcoes(i, input[4+i]);
-                setOpcoesEz(i, input[8+i]);
-            }
-        }else if (input.length == 6){ //Trata das perguntas de Desporto de V ou F
-            setOpcoes(0, input[4]);
-            setOpcoes(1, input[5]);
-        }else{ //Trata das perguntas de Artes
-            for (int i = 0; i < opcoes.length; i++) {
-                setOpcoes(i, input[4+i]);
-            }
-        }
-    }
-    // Métodos, Getter e Setter
+    public abstract int calculaPontos();
 
-    /**
-     * Obtém a pontuação da pergunta.
-     *
-     * @return A pontuação da pergunta.
-     */
-    protected int calculaPontos() {
-        int pontuacao = 0;
-        return pontuacao;
-    }
+    // --- Getters ---
 
-    /**
-     * Obtém o tipo da pergunta.
-     *
-     * @return O tipo da pergunta.
-     */
-    public int getTipo() {
-        return this.tipo;
-    }
-
-    /**
-     * Obtém o subtipo da pergunta.
-     *
-     * @return O subtipo da pergunta.
-     */
-    public int getSubtipo() {
-        return this.subtipo;
-    }
-
-    /**
-     * Obtém o texto da pergunta.
-     *
-     * @return O texto da pergunta.
-     */
     public String getPergunta() {
         return this.pergunta;
     }
 
-    /**
-     * Obtém a resposta correta da pergunta.
-     *
-     * @return A resposta correta da pergunta.
-     */
     public String getResposta() {
         return this.resposta;
     }
 
-    /**
-     * Obtém as opções de resposta da pergunta.
-     *
-     * @return As opções de resposta da pergunta.
-     */
     public String[] getOpcoes() {
-        return this.opcoes;
+        // Retorna uma cópia para encapsulamento
+        return (this.opcoes != null) ? this.opcoes.clone() : null;
     }
 
-    /**
-     * Obtém as opções fáceis de resposta da pergunta.
-     *
-     * @return As opções fáceis de resposta da pergunta.
-     */
     public String[] getOpcoesEz() {
-        return this.opcoesEz;
+         // Retorna uma cópia para encapsulamento
+        return (this.opcoesEz != null) ? this.opcoesEz.clone() : null;
     }
 
-    /**
-     * Obtém uma opção de resposta da pergunta.
-     * 
-     * @param index O índice da opção a ser obtida.
-     * @return A opção de resposta da pergunta.
-     */
+    // Getter para uma opção específica
     public String getUmaOpcoes(int index) {
-        return this.opcoes[index];
+        if (this.opcoes != null && index >= 0 && index < this.opcoes.length) {
+            return this.opcoes[index];
+        }
+        return null;
     }
 
-    /**
-     * Obtém a majoração associada à pergunta.
-     *
-     * @return A majoração associada à pergunta.
-     */
+    // Getter para uma opção fácil específica
+    public String getUmaOpcoesEz(int index) {
+        if (this.opcoesEz != null && index >= 0 && index < this.opcoesEz.length) {
+            return this.opcoesEz[index];
+        }
+        return null;
+    }
+
     public int getMajoracao() {
         return this.majoracao;
     }
 
-    /**
-     * Obtém a pontuação inicial da pergunta.
-     *
-     * @return A pontuação inicial da pergunta.
-     */
     public int getPontos() {
         return this.pontos;
     }
 
-    /**
-     * Obtém a resposta adicional da pergunta.
-     *
-     * @return A resposta adicional da pergunta.
-     */
     public String getResposta2() {
         return this.resposta2;
     }
 
-    // Métodos Setter
+    // --- Setters ---
 
-    /**
-     * Define o texto da pergunta.
-     *
-     * @param pergunta O novo texto da pergunta.
-     */
-    public void setPergunta(String pergunta) {
+    protected void setPergunta(String pergunta) {
         this.pergunta = pergunta;
     }
 
-    /**
-     * Define a resposta correta da pergunta.
-     *
-     * @param resposta A nova resposta correta da pergunta.
-     */
-    public void setResposta(String resposta) {
+    protected void setResposta(String resposta) {
         this.resposta = resposta;
     }
 
-    /**
-     * Define uma opção de resposta da pergunta.
-     *
-     * @param index O índice da opção a ser definida.
-     * @param opcao A nova opção de resposta.
-     */
-    public void setOpcoes(int index, String opcao) {
-        this.opcoes[index] = opcao;
+    // Setter para todas as opções (recebe uma cópia)
+    protected void setOpcoes(String[] opcoes) {
+        this.opcoes = (opcoes != null) ? opcoes.clone() : new String[4];
     }
 
-    /**
-     * Define uma opção fácil de resposta da pergunta.
-     *
-     * @param index O índice da opção fácil a ser definida.
-     * @param opcao A nova opção fácil de resposta.
-     */
-    public void setOpcoesEz(int index, String opcao) {
-        this.opcoesEz[index] = opcao;
+    // Setter para uma opção específica
+    protected void setOpcoes(int index, String opcao) {
+         // Garante que o array exista
+         if (this.opcoes == null) this.opcoes = new String[4];
+         if (index >= 0 && index < this.opcoes.length) {
+             this.opcoes[index] = opcao;
+         }
     }
 
-    /**
-     * Define a majoração associada à pergunta.
-     *
-     * @param majoracao A nova majoração da pergunta.
-     */
-    public void setMajoracao(int majoracao) {
+    // Setter para todas as opções fáceis (recebe uma cópia)
+    protected void setOpcoesEz(String[] opcoesEz) {
+        this.opcoesEz = (opcoesEz != null) ? opcoesEz.clone() : new String[4];
+    }
+
+    // Setter para uma opção fácil específica
+    protected void setOpcoesEz(int index, String opcao) {
+          // Garante que o array exista
+          if (this.opcoesEz == null) this.opcoesEz = new String[4];
+         if (index >= 0 && index < this.opcoesEz.length) {
+             this.opcoesEz[index] = opcao;
+         }
+    }
+
+    // Majoracao é geralmente definida pela subclasse, setter `protected`
+    protected void setMajoracao(int majoracao) {
         this.majoracao = majoracao;
     }
 
-    /**
-     * Define a pontuação inicial da pergunta.
-     *
-     * @param pontos A nova pontuação inicial da pergunta.
-     */
-    public void setPontos(int pontos) {
+    // Pontos base são definidos, mas pode haver necessidade de ajustar
+    protected void setPontos(int pontos) {
         this.pontos = pontos;
     }
 
-    /**
-     * Define a resposta adicional da pergunta.
-     *
-     * @param resposta2 A nova resposta adicional da pergunta.
-     */
-    public void setResposta2(String resposta2) {
+    protected void setResposta2(String resposta2) {
         this.resposta2 = resposta2;
-    }
-
-    /**
-     * Define o tipo da pergunta.
-     *
-     * @param tipo O novo tipo da pergunta.
-     */
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-
-    /**
-     * Define o subtipo da pergunta.
-     *
-     * @param subtipo O novo subtipo da pergunta.
-     */
-    public void setSubtipo(int subtipo) {
-        this.subtipo = subtipo;
     }
 }

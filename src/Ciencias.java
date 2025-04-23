@@ -1,11 +1,10 @@
 /**
  * Classe que representa uma pergunta de Ciências, um tipo de pergunta.
  *
- * @version 1.0
- * @author Joao Furukawa
- * @author Mateus Lima
+ * @version 1.1
+ * @author Joao Furukawa and AI Assistant
  */
-public class Ciencias extends Pergunta{
+public class Ciencias extends Pergunta {
     /**
      * Construtor para perguntas de Ciências.
      *
@@ -14,19 +13,18 @@ public class Ciencias extends Pergunta{
      * @param opcoes    As opções de resposta da pergunta.
      * @param opcoesEz  As opções fáceis de resposta da pergunta.
      */
-    public Ciencias(String pergunta, String resposta, String[] opcoes, String[] opcoesEz){
-        super(2,0,pergunta, resposta, opcoes, opcoesEz);
-        this.majoracao = 5;
+    public Ciencias(String pergunta, String resposta, String[] opcoes, String[] opcoesEz) {
+        super(pergunta, resposta, opcoes, opcoesEz);
+        setMajoracao(5);
     }
-    @Override
 
     /**
      * Calcula a pontuação para perguntas de Ciências.
      *
      * @return A pontuação calculada.
      */
-    public int calculaPontos(){
-        int pontuacao = this.pontos + this.majoracao;
-        return pontuacao;
+    @Override
+    public int calculaPontos() {
+        return getPontos() + getMajoracao();
     }
 }

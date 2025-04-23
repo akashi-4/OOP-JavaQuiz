@@ -9,7 +9,6 @@ import java.util.List;
  *
  * @version 1.0
  * @author Joao Furukawa 
- * @author Mateus Lima
  */
 public class Potrivia {
     /**
@@ -70,7 +69,7 @@ public class Potrivia {
      * @param perguntasEscolh Lista para armazenar as 5 perguntas escolhidas.
      */
     private static void escolhe5Perguntas(ArrayList<Pergunta> todasPerguntas, ArrayList<Pergunta> perguntasEscolh){
-        ArrayList<Pergunta> arrAux = new ArrayList<>(List.copyOf(todasPerguntas));
+        ArrayList<Pergunta> arrAux = new ArrayList<>(todasPerguntas);
         for (int i = 0; i < 5; i++) {
             int random = (int) (Math.random() * arrAux.size());
             perguntasEscolh.add(arrAux.get(random));
@@ -102,23 +101,68 @@ public class Potrivia {
      * @param perguntas Lista para armazenar as perguntas inicializadas.
      * @param a         String contendo os dados da pergunta.
      */
-    private static void inicializaArray(ArrayList<Pergunta> perguntas, String a){
-        Pergunta aux = new Pergunta();
-        aux.leInput(a);
-        if (aux.tipo == 1){
-            perguntas.add(new Artes(aux.pergunta, aux.resposta, aux.opcoes));
+    private static void inicializaArray(ArrayList<Pergunta> perguntas, String a) {
+        String[] input = a.split(";");
+        int tipo = Integer.parseInt(input[0]);
+        int subtipo = Integer.parseInt(input[1]);
+        String pergunta = input[2];
+        String resposta = input[3];
+        
+        if (tipo == 1) { // Artes
+            String[] opcoes = new String[4];
+            for (int i = 0; i < opcoes.length; i++) {
+                opcoes[i] = input[4+i];
+            }
+            perguntas.add(new Artes(pergunta, resposta, opcoes));
         }
-        else if (aux.tipo == 2){
-            perguntas.add(new Ciencias(aux.pergunta, aux.resposta, aux.opcoes,aux.opcoesEz));
+        else if (tipo == 2) { // Ciencias
+            String[] opcoes = new String[4];
+            String[] opcoesEz = new String[4];
+            for (int i = 0; i < opcoes.length; i++) {
+                opcoes[i] = input[4+i];
+                opcoesEz[i] = input[8+i];
+            }
+            perguntas.add(new Ciencias(pergunta, resposta, opcoes, opcoesEz));
         }
-        else if(aux.subtipo == 1){
-            perguntas.add(new Futebol(aux.pergunta, aux.resposta, aux.opcoes, aux.opcoesEz,aux.resposta2));
-        }
-        else if (aux.subtipo == 2){
-            perguntas.add(new Ski(aux.pergunta, aux.resposta, aux.opcoes));
-        }
-        else if (aux.subtipo == 3){
-            perguntas.add(new Natacao(aux.pergunta, aux.resposta, aux.opcoes));
+        else if (tipo == 3) { // Desporto
+            if (subtipo == 1) { // Futebol
+                String resposta2 = input[4];
+                String[] opcoes = new String[4];
+                String[] opcoesEz = new String[4];
+                for (int i = 0; i < opcoes.length; i++) {
+                    opcoes[i] = input[5+i];
+                    opcoesEz[i] = input[9+i];
+                }
+                perguntas.add(new Futebol(pergunta, resposta, opcoes, opcoesEz, resposta2));
+            }
+            else if (subtipo == 2) { // Ski
+                String[] opcoes = new String[2]; // Se for V ou F
+                if (input.length == 6) {
+                    opcoes[0] = input[4];
+                    opcoes[1] = input[5];
+                } else {
+                    // Se não for V ou F, lê opções normais (conforme necessário)
+                    opcoes = new String[4];
+                    for (int i = 0; i < opcoes.length; i++) {
+                        opcoes[i] = input[4+i];
+                    }
+                }
+                perguntas.add(new Ski(pergunta, resposta, opcoes));
+            }
+            else if (subtipo == 3) { // Natacao
+                String[] opcoes = new String[2]; // Se for V ou F
+                if (input.length == 6) {
+                    opcoes[0] = input[4];
+                    opcoes[1] = input[5];
+                } else {
+                    // Se não for V ou F, lê opções normais (conforme necessário)
+                    opcoes = new String[4];
+                    for (int i = 0; i < opcoes.length; i++) {
+                        opcoes[i] = input[4+i];
+                    }
+                }
+                perguntas.add(new Natacao(pergunta, resposta, opcoes));
+            }
         }
     }
 }
